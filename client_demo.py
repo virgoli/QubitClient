@@ -35,6 +35,11 @@ def send_npz_to_server(url, api_key):
     for i, image in enumerate(result_images):
         cv2.imwrite(f"./tmp/client/result_{i}.jpg", image)
 
+    result = client.get_result(response=response)
+    print(result[0]["params_list"])
+    print(result[0]["linepoints_list"])
+    print(result[0]["confidence_list"])
+
 def main():
     from config import API_URL, API_KEY
 
