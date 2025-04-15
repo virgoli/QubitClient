@@ -25,12 +25,13 @@ def send_npz_to_server(url, api_key):
         if file_name.endswith('.npz'):
             file_path = os.path.join(dir_path, file_name)
             file_path_list.append(file_path)
-    images = load_npz_to_images(file_path_list)
+    
 
 
     client = QubitSegClient(url=url, api_key=api_key)
     response = client.request(file_path_list=file_path_list)
 
+    images = load_npz_to_images(file_path_list)
     result_images = client.parser_result_with_image(response=response, images=images)
     for i, image in enumerate(result_images):
         cv2.imwrite(f"./tmp/client/result_{i}.jpg", image)
