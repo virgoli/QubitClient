@@ -75,7 +75,7 @@ def send_npz_to_server(url, api_key):
         reflection_points = np.array(reflection_points)
         xy_x = reflection_points[:, 0]  # 提取 x 坐标
         xy_y = reflection_points[:, 1]  # 提取 y 坐标
-        plt.scatter(xy_x, xy_y, color=colors[i], label=f'XY Points{i}-conf:{result[0]["confidence_list"][i]}', s=5, alpha=0.1)  # 绘制散点图
+        plt.scatter(xy_x, xy_y, color=colors[i], label=f'XY Points{i}-conf:{round(result[0]["confidence_list"][i],2)}', s=5, alpha=0.1)  # 绘制散点图
     # 图形设置
     plt.title(f"File: {file_name}")
     plt.xlabel("Bias")
