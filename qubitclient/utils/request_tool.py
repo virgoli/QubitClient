@@ -21,7 +21,7 @@ def file_request(file_path_list,url,api_key,curve_type:CurveType=None):
             files.append(("request", (file_name, open(file_path, "rb"), "image/jpeg")))
     headers = {'Authorization': f'Bearer {api_key}'}  # 添加API密钥到请求头
     data = {
-            "confidence_type":curve_type.value if curve_type else None
+            "curve_type":curve_type.value if curve_type else None
     }
     response = requests.post(url, files=files, headers=headers,data=data)
     return response
@@ -35,7 +35,7 @@ def file_request_with_dict(dict_list,url,api_key,curve_type:str=None):
         files.append(("request", ("None"+str(index)+".npz", bytes_obj, "application/octet-stream")))
     headers = {'Authorization': f'Bearer {api_key}'}  # 添加API密钥到请求头
     data = {
-            "confidence_type":curve_type.value if curve_type else None
+            "curve_type":curve_type.value if curve_type else None
     }
     response = requests.post(url, files=files, headers=headers,data=data)
     return response
