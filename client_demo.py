@@ -67,8 +67,9 @@ def send_npz_to_server(url, api_key):
     bias = dict_list[index]["bias"] # 42
     reflection_points_lst = []
     for i in range(len(result["linepoints_list"])):
-        reflection_points = client.convert_axis(result["linepoints_list"][i], bias,frequency)
-        reflection_points_lst.append(reflection_points)
+        # reflection_points = client.convert_axis(result["linepoints_list"][i], bias,frequency)
+        # reflection_points_lst.append(reflection_points)
+        reflection_points_lst.append(result["linepoints_list"][i])
 
     plt.figure(figsize=(10, 6))
     plt.pcolormesh(dict_list[index]["bias"], dict_list[index]["frequency"],  dict_list[index]["iq_avg"], shading='auto', cmap='viridis')
