@@ -92,13 +92,14 @@ def send_npz_to_server(url, api_key,dir_path = "data/33137"):
             xy_x = reflection_points[:, 0]  # 提取 x 坐标
             xy_y = reflection_points[:, 1]  # 提取 y 坐标
             plt.scatter(xy_x, xy_y, color=colors[i], label=f'XY Points{i}-conf:{round(result["confidence_list"][i],2)}', s=5, alpha=0.1)  # 绘制散点图
+        file_name = file_names[index]
         # 图形设置
         plt.title(f"File: {file_name}")
         plt.xlabel("Bias")
         plt.ylabel("Frequency (GHz)")
         plt.legend()
         plt.show()
-        file_name = file_names[index]
+        
         save_path = f"./tmp/client/result_{file_name}.png"
         save_dir = os.path.dirname(save_path)
         if not os.path.exists(save_dir):
