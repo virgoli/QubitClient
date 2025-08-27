@@ -22,6 +22,11 @@ cp config.py.example config.py
 ```Python
 python client_demo.py
 ```
+#### 定义实例
+```
+client = QubitSegClient(url=url, api_key=api_key,curve_type=CurveType.POLY)
+```
+curve_type: CurveType.COSINE(cosin拟合) or CurveType.POLY(多项式拟合)
 
 #### 请求输入
 

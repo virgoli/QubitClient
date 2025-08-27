@@ -39,7 +39,8 @@ def send_npz_to_server(url, api_key,dir_path = "data/33137"):
     
 
 
-    client = QubitSegClient(url=url, api_key=api_key,curve_type=CurveType.COSINE)
+    # curve_type = CurveType.COSINE or CurveType.POLY
+    client = QubitSegClient(url=url, api_key=api_key,curve_type=CurveType.POLY)
     
 
 
