@@ -19,8 +19,13 @@ QubitClient 是用于使用Qubit服务的示例。
 cp config.py.example config.py
 ```
 2.运行
-```Python
+单次请求多个文件：
+```bash
 python client_demo.py
+```
+批量多次请求
+```bash
+python script/test.py
 ```
 #### 定义实例
 ```
