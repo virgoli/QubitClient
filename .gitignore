@@ -26,3 +26,4 @@ config.py
 dist/
 build/
 qubitclient.egg-info/
+py.typed
