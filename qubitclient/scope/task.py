@@ -68,62 +68,54 @@ def task_register(func):
     DEFINED_TASKS[func.__name__.lower()] = func
     return func
 
-def run_task(client,filepath_list: list[str|dict[str,np.ndarray]|np.ndarray],task_type:str):
-    response = DEFINED_TASKS[task_type.value](client,filepath_list)
+def run_task(client,file_list: list[str|dict[str,np.ndarray]|np.ndarray],task_type:str):
+    files = load_files(file_list)
+    response = DEFINED_TASKS[task_type.value](client,files)
     return response
 
 
 @task_register
-def s21peak(client,filepath_list: list[str|dict[str,np.ndarray]]):
-    files = load_files(filepath_list)
+def s21peak(client,files: File):
     body: BodyS21PeakApiV1TasksScopeS21PeakPost = BodyS21PeakApiV1TasksScopeS21PeakPost(files=files)
     response: Response[BodyS21PeakApiV1TasksScopeS21PeakPost] = s21peak_api_v1_tasks_scope_s21peak_post.sync_detailed(client=client,body=body)
     return response
 @task_register
-def optpipulse(client,filepath_list: list[str|dict[str,np.ndarray]]):
-    files = load_files(filepath_list)
+def optpipulse(client,files: File):
     body: BodyOptpipulseApiV1TasksScopeOptpipulsePost = BodyOptpipulseApiV1TasksScopeOptpipulsePost(files=files)
     response: Response[BodyOptpipulseApiV1TasksScopeOptpipulsePost] = optpipulse_api_v1_tasks_scope_optpipulse_post.sync_detailed(client=client,body=body)
     return response
 @task_register
-def rabi(client,filepath_list: list[str|dict[str,np.ndarray]]):
-    files = load_files(filepath_list)
+def rabi(client,files: File):
     body: BodyRabiApiV1TasksScopeRabiPost = BodyRabiApiV1TasksScopeRabiPost(files=files)
     response: Response[BodyRabiApiV1TasksScopeRabiPost] = rabi_api_v1_tasks_scope_rabi_post.sync_detailed(client=client,body=body)
     return response
 @task_register
-def rabicos(client,filepath_list: list[str|dict[str,np.ndarray]]):
-    files = load_files(filepath_list)
+def rabicos(client,files: File):
     body: BodyRabicosApiV1TasksScopeRabicospeakPost = BodyRabicosApiV1TasksScopeRabicospeakPost(files=files)
     response: Response[BodyRabicosApiV1TasksScopeRabicospeakPost] = rabicos_api_v1_tasks_scope_rabicospeak_post.sync_detailed(client=client,body=body)
     return response
 @task_register
-def s21vflux(client,filepath_list: list[str|dict[str,np.ndarray]]):
-    files = load_files(filepath_list)
+def s21vflux(client,files: File):
     body: BodyS21VfluxApiV1TasksScopeS21VfluxPost = BodyS21VfluxApiV1TasksScopeS21VfluxPost(files=files)
     response: Response[BodyS21VfluxApiV1TasksScopeS21VfluxPost] = s21vflux_api_v1_tasks_scope_s21vflux_post.sync_detailed(client=client,body=body)
     return response
 @task_register
-def singleshot(client,filepath_list: list[str|dict[str,np.ndarray]]):
-    files = load_files(filepath_list)
+def singleshot(client,files: File):
     body: BodySingleshotApiV1TasksScopeSingleshotPost = BodySingleshotApiV1TasksScopeSingleshotPost(files=files)
     response: Response[BodySingleshotApiV1TasksScopeSingleshotPost] = singleshot_api_v1_tasks_scope_singleshot_post.sync_detailed(client=client,body=body)
     return response
 @task_register
-def spectrum(client,filepath_list: list[str|dict[str,np.ndarray]]):
-    files = load_files(filepath_list)
+def spectrum(client,files: File):
     body: BodySpectrumApiV1TasksScopeSpectrumPost = BodySpectrumApiV1TasksScopeSpectrumPost(files=files)
     response: Response[BodySpectrumApiV1TasksScopeSpectrumPost] = spectrum_api_v1_tasks_scope_spectrum_post.sync_detailed(client=client,body=body)
     return response
 @task_register
-def t1fit(client,filepath_list: list[str|dict[str,np.ndarray]]):
-    files = load_files(filepath_list)
+def t1fit(client,files: File):
     body: BodyT1FitApiV1TasksScopeT1FitPost = BodyT1FitApiV1TasksScopeT1FitPost(files=files)
     response: Response[BodyT1FitApiV1TasksScopeT1FitPost] = t1fit_api_v1_tasks_scope_t1fit_post.sync_detailed(client=client,body=body)
     return response
 @task_register
-def t2fit(client,filepath_list: list[str|dict[str,np.ndarray]]):
-    files = load_files(filepath_list)
+def t2fit(client,files: File):
     body: BodyT1FitApiV1TasksScopeT2FitPost = BodyT1FitApiV1TasksScopeT2FitPost(files=files)
     response: Response[BodyT1FitApiV1TasksScopeT2FitPost] = t1fit_api_v1_tasks_scope_t2fit_post.sync_detailed(client=client,body=body)
     return response
