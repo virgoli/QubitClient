@@ -14,9 +14,20 @@ import numpy as np
 # from qubitclient.utils.data_parser import load_npz_to_images
 from qubitclient.utils.data_parser import load_npz_file
 from qubitclient.QubitSeg import QubitSegClient
+from qubitclient.utils.data_convert import convert_spectrum_npy2npz
 
 import matplotlib.pyplot as plt  # 引入 matplotlib 绘图库
 from qubitclient import CurveType
+
+def send_spectrum_npy_to_server(url, api_key):
+    file_path = "tmp/npyfile/tmp0ffc025b.py_4905.npy"
+    dict_list, name_list = convert_spectrum_npy2npz(file_path)
+
+    client = QubitSegClient(url=url, api_key=api_key,curve_type=CurveType.COSINE)
+
+    response = client.request(file_list=dict_list)
+    results = client.get_result(response=response)
+    plot_result(results,dict_list,name_list,index=0)
 
 
 def send_npz_to_server(url, api_key):
@@ -52,13 +63,15 @@ def send_npz_to_server(url, api_key):
     #     cv2.imwrite(f"./tmp/client/result_{i}.jpg", image)
 
     results = client.get_result(response=response)
+    plot_result(results,dict_list,file_names,index=0)
 
 
-    index = 0
+def plot_result(results,dict_list,file_names,index = 0):
     result = results[index]
     print(result["params_list"])
     print(result["linepoints_list"])
     print(result["confidence_list"])
+    file_name = file_names[index]
     
     
     # 增加结果坐标映射
@@ -91,6 +104,7 @@ def send_npz_to_server(url, api_key):
     plt.legend()
     plt.show()
     save_path = "./tmp/client/result.png"
+    # save_path = f"./tmp/client/result_{file_name}.png"
     save_dir = os.path.dirname(save_path)
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
@@ -103,6 +117,7 @@ def main():
     from config import API_URL, API_KEY
 
     send_npz_to_server(API_URL, API_KEY)  # 传递API密钥
+    # send_spectrum_npy_to_server(API_URL, API_KEY)  # 传递API密钥
 
 if __name__ == "__main__":
     main()
