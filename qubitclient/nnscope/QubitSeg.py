@@ -10,10 +10,10 @@
 import logging
 import numpy as np
 
-from qubitclient.utils.request_tool import file_request,file_request_with_dict
-from qubitclient.utils.result_parser import parser_result
-from qubitclient.utils.result_parser import convet_axis
-from qubitclient.curve.curve_type import CurveType
+from qubitclient.nnscope.utils.request_tool import file_request,file_request_with_dict
+from qubitclient.nnscope.utils.result_parser import parser_result
+from qubitclient.nnscope.utils.result_parser import convet_axis
+from qubitclient.nnscope.curve.curve_type import CurveType
 
 
 logging.basicConfig(level=logging.INFO)
