@@ -35,7 +35,7 @@ class QubitNNScopeClient(object):
 
     def request(self, file_list:list[str|dict[str,np.ndarray]],task_type:str="s21peak"):
         if len(file_list)>0:
-            response = run_task(self.client,file_list,task_type)
+            response = run_task(file_list,task_type)
         else:
             raise ValueError("file_list must not be empty")
         return response

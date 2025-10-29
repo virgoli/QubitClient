@@ -22,7 +22,7 @@ def load_from_dict(dict_list:list[dict],url,api_key,curve_type:str=None):
             bytes_obj = buffer.getvalue()
         files.append(("request", ("None"+str(index)+".npz", bytes_obj, "application/octet-stream")))
     return files
-def request(files,url,api_key,curve_type:str=None):
+def request_task(files,url,api_key,curve_type:str=None):
     headers = {'Authorization': f'Bearer {api_key}'}  # 添加API密钥到请求头
     data = {
             "curve_type":curve_type.value if curve_type else None
@@ -45,9 +45,9 @@ def task_register(func):
     DEFINED_TASKS[func.__name__.lower()] = func
     return func
 
-def run_task(client,file_list: list[str|dict[str,np.ndarray]|np.ndarray],task_type:str):
+def run_task(client,file_list: list[str|dict[str,np.ndarray]|np.ndarray],task_type:str,*args,**kwargs):
     files = load_files(file_list)
-    response = DEFINED_TASKS[task_type.value](client,files)
+    response = DEFINED_TASKS[task_type.value](client,files,*args,**kwargs)
     return response
 
 
@@ -55,6 +55,13 @@ def run_task(client,file_list: list[str|dict[str,np.ndarray]|np.ndarray],task_ty
 def test(client,files):
     
     return "hello"
+
+@task_register
+def spectrum2d(filepath_list,url,api_key,curve_type):
+    files = load_files(filepath_list)
+    spectrum2d_url = url + "/segline"
+    response = request_task(files,spectrum2d_url,api_key,curve_type)
+    return response
 
 from enum import Enum, unique
 @unique
