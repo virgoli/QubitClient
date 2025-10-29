@@ -73,9 +73,9 @@ def load_npz_to_image(file_path):
 def convert_spectrum_npy2npz(npy_file_path:str):
     data = np.load(npy_file_path, allow_pickle=True)
     data = data.item() if isinstance(data, np.ndarray) else data
-    dict_list, name_list = convert_spectrum_dict2npz(data)
+    dict_list, name_list = convert_spectrum_dict2npz(data,npy_file_path)
     return dict_list, name_list
-def convert_spectrum_dict2npz(data:dict):
+def convert_spectrum_dict2npz(data:dict,npy_file_path:str):
     if not isinstance(data, dict) or 'image' not in data:
             raise ValueError("数据格式无效，缺少 'image' 键")
     image = data["image"]
@@ -88,6 +88,8 @@ def convert_spectrum_dict2npz(data:dict):
         image_q = image[q_name]
 
         data = image_q[0]
+        if data.ndim != 2:
+            raise ValueError("数据格式无效，data不是二维数组")
         data = np.array(data)
         data = np.abs(data)
         height_axis = image_q[1]
