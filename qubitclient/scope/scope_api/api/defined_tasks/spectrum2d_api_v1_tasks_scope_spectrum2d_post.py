@@ -5,15 +5,15 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.body_optpipulse_api_v1_tasks_scope_optpipulse_post import BodyOptpipulseApiV1TasksScopeOptpipulsePost
+from ...models.body_spectrum_2d_api_v1_tasks_scope_spectrum_2d_post import BodySpectrum2DApiV1TasksScopeSpectrum2DPost
 from ...models.http_validation_error import HTTPValidationError
 from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    body: BodyOptpipulseApiV1TasksScopeOptpipulsePost,
-    type_: Union[Unset, str] = "optpipulse",
+    body: BodySpectrum2DApiV1TasksScopeSpectrum2DPost,
+    type_: Union[Unset, str] = "spectrum2d",
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
@@ -25,7 +25,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/api/v1/tasks/scope/optpipulse",
+        "url": "/api/v1/tasks/scope/spectrum2d",
         "params": params,
     }
 
@@ -67,23 +67,23 @@ def _build_response(
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    body: BodyOptpipulseApiV1TasksScopeOptpipulsePost,
-    type_: Union[Unset, str] = "optpipulse",
+    body: BodySpectrum2DApiV1TasksScopeSpectrum2DPost,
+    type_: Union[Unset, str] = "spectrum2d",
 ) -> Response[Union[Any, HTTPValidationError]]:
-    r"""Optpipulse
+    r"""Spectrum2D
 
-     Common peak detection for optimizing pi pulse
+     spectrum2d
 
     Args:
         files: 上传的.npy文件列表
-        type: 任务类型，默认为\"optpipulse\"
+        type: 任务类型，默认为\"spectrum2d\"
 
     Returns:
         dict: 包含检测结果的字典
 
     Args:
-        type_ (Union[Unset, str]): 任务类型 Default: 'optpipulse'.
-        body (BodyOptpipulseApiV1TasksScopeOptpipulsePost):
+        type_ (Union[Unset, str]): 任务类型 Default: 'spectrum2d'.
+        body (BodySpectrum2DApiV1TasksScopeSpectrum2DPost):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -108,23 +108,23 @@ def sync_detailed(
 def sync(
     *,
     client: Union[AuthenticatedClient, Client],
-    body: BodyOptpipulseApiV1TasksScopeOptpipulsePost,
-    type_: Union[Unset, str] = "optpipulse",
+    body: BodySpectrum2DApiV1TasksScopeSpectrum2DPost,
+    type_: Union[Unset, str] = "spectrum2d",
 ) -> Optional[Union[Any, HTTPValidationError]]:
-    r"""Optpipulse
+    r"""Spectrum2D
 
-     Common peak detection for optimizing pi pulse
+     spectrum2d
 
     Args:
         files: 上传的.npy文件列表
-        type: 任务类型，默认为\"optpipulse\"
+        type: 任务类型，默认为\"spectrum2d\"
 
     Returns:
         dict: 包含检测结果的字典
 
     Args:
-        type_ (Union[Unset, str]): 任务类型 Default: 'optpipulse'.
-        body (BodyOptpipulseApiV1TasksScopeOptpipulsePost):
+        type_ (Union[Unset, str]): 任务类型 Default: 'spectrum2d'.
+        body (BodySpectrum2DApiV1TasksScopeSpectrum2DPost):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -144,23 +144,23 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-    body: BodyOptpipulseApiV1TasksScopeOptpipulsePost,
-    type_: Union[Unset, str] = "optpipulse",
+    body: BodySpectrum2DApiV1TasksScopeSpectrum2DPost,
+    type_: Union[Unset, str] = "spectrum2d",
 ) -> Response[Union[Any, HTTPValidationError]]:
-    r"""Optpipulse
+    r"""Spectrum2D
 
-     Common peak detection for optimizing pi pulse
+     spectrum2d
 
     Args:
         files: 上传的.npy文件列表
-        type: 任务类型，默认为\"optpipulse\"
+        type: 任务类型，默认为\"spectrum2d\"
 
     Returns:
         dict: 包含检测结果的字典
 
     Args:
-        type_ (Union[Unset, str]): 任务类型 Default: 'optpipulse'.
-        body (BodyOptpipulseApiV1TasksScopeOptpipulsePost):
+        type_ (Union[Unset, str]): 任务类型 Default: 'spectrum2d'.
+        body (BodySpectrum2DApiV1TasksScopeSpectrum2DPost):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -183,23 +183,23 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
-    body: BodyOptpipulseApiV1TasksScopeOptpipulsePost,
-    type_: Union[Unset, str] = "optpipulse",
+    body: BodySpectrum2DApiV1TasksScopeSpectrum2DPost,
+    type_: Union[Unset, str] = "spectrum2d",
 ) -> Optional[Union[Any, HTTPValidationError]]:
-    r"""Optpipulse
+    r"""Spectrum2D
 
-     Common peak detection for optimizing pi pulse
+     spectrum2d
 
     Args:
         files: 上传的.npy文件列表
-        type: 任务类型，默认为\"optpipulse\"
+        type: 任务类型，默认为\"spectrum2d\"
 
     Returns:
         dict: 包含检测结果的字典
 
     Args:
-        type_ (Union[Unset, str]): 任务类型 Default: 'optpipulse'.
-        body (BodyOptpipulseApiV1TasksScopeOptpipulsePost):
+        type_ (Union[Unset, str]): 任务类型 Default: 'spectrum2d'.
+        body (BodySpectrum2DApiV1TasksScopeSpectrum2DPost):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
