@@ -75,7 +75,7 @@ def convert_spectrum_npy2npz(npy_file_path:str):
     data = data.item() if isinstance(data, np.ndarray) else data
     dict_list, name_list = convert_spectrum_dict2npz(data,npy_file_path)
     return dict_list, name_list
-def convert_spectrum_dict2npz(data:dict,npy_file_path:str):
+def convert_spectrum_dict2npz(data:dict,npy_file_path:str="None.npy"):
     if not isinstance(data, dict) or 'image' not in data:
             raise ValueError("数据格式无效，缺少 'image' 键")
     image = data["image"]

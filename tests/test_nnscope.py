@@ -58,10 +58,13 @@ def send_npy_to_server(url, api_key,file_path = "/home/sunyaqiang/work/QubitClie
     
     client = QubitNNScopeClient(url=url,api_key="")
     
-    #使用从文件路径加载后的对象，格式为np.ndarray，多个组合成list
-    response = client.request(file_list=[file_path],task_type=NNTaskName.SPECTRUM2D,curve_type=CurveType.COSINE)
-    # 从文件路径直接加载
-    # response = client.request(file_list=file_path_list,task_type=NNTaskName.SPECTRUM2D,curve_type=CurveType.COSINE)
+    # 1.使用从文件路径加载后的对象，格式为np.ndarray，多个组合成list
+    import numpy as np
+    data = np.load(file_path, allow_pickle=True)
+    data_dict = data.item() if isinstance(data, np.ndarray) else data
+    response = client.request(file_list=[data_dict],task_type=NNTaskName.SPECTRUM2D,curve_type=CurveType.COSINE)
+    # 2.从文件路径直接加载
+    # response = client.request(file_list=[file_path],task_type=NNTaskName.SPECTRUM2D,curve_type=CurveType.COSINE)
     results = client.get_result(response=response)
     print(results)
 

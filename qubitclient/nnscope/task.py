@@ -35,6 +35,17 @@ def load_from_npz_dict(dict_list:list[dict]):
             bytes_obj = buffer.getvalue()
         files.append(("request", ("None"+str(index)+".npz", bytes_obj, "application/octet-stream")))
     return files
+def load_from_npy_dict(dict_list:list[dict]):
+    files = []
+    for dict_obj in dict_list:
+        qubit_dict_list, name_list = convert_spectrum_dict2npz(dict_obj)
+        
+        for data_dict, filename in zip(qubit_dict_list, name_list):
+            with io.BytesIO() as buffer:
+                np.savez(buffer, **data_dict)
+                bytes_obj = buffer.getvalue()
+            files.append(("request", (filename, bytes_obj, "application/octet-stream")))
+    return files
 def request_task(files,url,api_key,curve_type:str=None):
     headers = {'Authorization': f'Bearer {api_key}'}  # 添加API密钥到请求头
     data = {
@@ -47,7 +58,10 @@ def load_files(filepath_list: list[str|dict[str,np.ndarray]|np.ndarray]):
         return []
     else:
         if isinstance(filepath_list[0], dict):
-            return load_from_npz_dict(filepath_list)
+            if "image" in filepath_list[0]:
+                return load_from_npy_dict(filepath_list)
+            else:
+                return load_from_npz_dict(filepath_list)
         # elif isinstance(filepath_list[0], np.ndarray):
         #     return load_from_ndarray(filepath_list)
         elif isinstance(filepath_list[0], str):
