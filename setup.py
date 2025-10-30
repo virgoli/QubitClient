@@ -38,7 +38,7 @@ Operating System :: MacOS :: MacOS X
 curr_path = os.path.abspath(os.path.dirname(__file__))
 setup(
     name='qubitclient',
-    version='0.0.0.1',
+    version='0.0.1',
     packages=find_packages(),
     package_data={'qubitclient': ['py.typed']},
     python_requires='>=3.8',
