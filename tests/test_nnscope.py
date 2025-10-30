@@ -193,11 +193,11 @@ def main():
     from config import API_URL, API_KEY
 
     # 1. npz file.
-    base_dir = "data/1829"
-    send_npz_to_server(API_URL, API_KEY, base_dir)
+    # base_dir = "data/1829"
+    # send_npz_to_server(API_URL, API_KEY, base_dir)
     # 2. npy file.
-    # file_path = "/home/sunyaqiang/work/QubitClient/tmp/npyfile/tmp0ffc025b.py_4905.npy"
-    # send_npy_to_server(API_URL, API_KEY, file_path)
+    file_path = "/home/sunyaqiang/work/QubitClient/tmp/npyfile/tmp0ffc025b.py_4905.npy"
+    send_npy_to_server(API_URL, API_KEY, file_path)
 
 
 
