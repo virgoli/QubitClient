@@ -62,8 +62,9 @@ def load_files(filepath_list: list[str|dict[str,np.ndarray]|np.ndarray]):
                 return load_from_npy_dict(filepath_list)
             else:
                 return load_from_npz_dict(filepath_list)
-        # elif isinstance(filepath_list[0], np.ndarray):
-        #     return load_from_ndarray(filepath_list)
+        elif isinstance(filepath_list[0], np.ndarray):
+            filepath_list = [filepath_list[i].item() for i in range(len(filepath_list))]
+            return load_files(filepath_list)
         elif isinstance(filepath_list[0], str):
             if filepath_list[0].endswith('.npz'):
                 return load_from_npz_path(filepath_list)
