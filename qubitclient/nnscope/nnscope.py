@@ -33,7 +33,7 @@ class QubitNNScopeClient(object):
         self.url = url
         self.api_key = api_key
 
-    def request(self, file_list:list[str|dict[str,np.ndarray]],task_type:str="s21peak",*args,**kwargs):
+    def request(self, file_list:list[str|dict[str,np.ndarray]|np.ndarray],task_type:str="s21peak",*args,**kwargs):
         if len(file_list)>0:
             response = run_task(file_list=file_list,url=self.url,api_key=self.api_key,task_type=task_type,*args,**kwargs)
         else:

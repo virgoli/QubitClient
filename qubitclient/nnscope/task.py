@@ -11,40 +11,54 @@ from qubitclient.nnscope.utils.data_convert import convert_spectrum_npy2npz,conv
 # load from npz file path
 def load_from_npz_path(file_path_list:list[str]):
     files = []
+    npydata = {}
+    npydata['id'] = 0
+    image_qs = {}
+    index = 0
     for file_path in file_path_list:
         if file_path.endswith('.npz'):
-            file_name = os.path.basename(file_path)
-            files.append(("request", (file_name, open(file_path, "rb"), "image/jpeg")))
+            index+=1
+            with np.load(file_path, allow_pickle=True) as data:  # 修改：添加 allow_pickle=True 参数
+                # file_contents[file_name] = dict(data)  # 将 .npz 文件内容转换为字典
+                content = dict(data)  # 将 .npz 文件内容转换为字典
+                image_qs[str(index)] = (content['iq_avg'],content['bias'],content['frequency'])
+    npydata['image'] = image_qs
+    with io.BytesIO() as buffer:
+        np.savez(buffer, **npydata)
+        bytes_obj = buffer.getvalue()
+    files.append(("request", ("None.npz", bytes_obj, "application/octet-stream")))
     return files
 def load_from_npy_path(file_path_list:list[str]):
     files = []
     for file_path in file_path_list:
         if file_path.endswith('.npy'):
-            dict_list, name_list = convert_spectrum_npy2npz(file_path)
-            for data_dict, filename in zip(dict_list, name_list):
-                with io.BytesIO() as buffer:
-                    np.savez(buffer, **data_dict)
-                    bytes_obj = buffer.getvalue()
-                files.append(("request", (filename, bytes_obj, "application/octet-stream")))
+            data = np.load(file_path, allow_pickle=True)
+            data = data.item() if isinstance(data, np.ndarray) else data
+            with io.BytesIO() as buffer:
+                np.savez(buffer, **data)
+                bytes_obj = buffer.getvalue()
+            files.append(("request", ("None.npz", bytes_obj, "application/octet-stream")))
     return files
 def load_from_npz_dict(dict_list:list[dict]):
     files = []
+    npydata = {}
+    npydata['id'] = 0
+    image_qs = {}
     for index,dict_obj in enumerate(dict_list):
-        with io.BytesIO() as buffer:
-            np.savez(buffer, **dict_obj)
-            bytes_obj = buffer.getvalue()
-        files.append(("request", ("None"+str(index)+".npz", bytes_obj, "application/octet-stream")))
+        image_qs[str(index)] = (dict_obj['iq_avg'], dict_obj['bias'], dict_obj['frequency'])
+    npydata['image'] = image_qs
+    with io.BytesIO() as buffer:
+        np.savez(buffer, **npydata)
+        bytes_obj = buffer.getvalue()
+    files.append(("request", ("None.npz", bytes_obj, "application/octet-stream")))
     return files
 def load_from_npy_dict(dict_list:list[dict]):
     files = []
     for dict_obj in dict_list:
-        qubit_dict_list, name_list = convert_spectrum_dict2npz(dict_obj)
-        
-        for data_dict, filename in zip(qubit_dict_list, name_list):
-            with io.BytesIO() as buffer:
-                np.savez(buffer, **data_dict)
-                bytes_obj = buffer.getvalue()
-            files.append(("request", (filename, bytes_obj, "application/octet-stream")))
+        with io.BytesIO() as buffer:
+            np.savez(buffer, **dict_obj)
+            bytes_obj = buffer.getvalue()
+        files.append(("request", ("None.npz",bytes_obj, "application/octet-stream")))
     return files
 def request_task(files,url,api_key,curve_type:str=None):
     headers = {'Authorization': f'Bearer {api_key}'}  # 添加API密钥到请求头
@@ -72,7 +86,9 @@ def load_files(filepath_list: list[str|dict[str,np.ndarray]|np.ndarray]):
                 return load_from_npy_path(filepath_list)
             else:
                 return []
-        
+
+
+
 DEFINED_TASKS = {}
 def task_register(func):
     DEFINED_TASKS[func.__name__.lower()] = func
