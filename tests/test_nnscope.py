@@ -39,7 +39,7 @@ def send_npz_to_server(url, api_key,dir_path = "data/33137"):
     if len(file_path_list)==0:
         return
 
-    client = QubitNNScopeClient(url=url,api_key="")
+    client = QubitNNScopeClient(url=url,api_key=api_key)
 
     dict_list = []
     for file_path in file_path_list:
@@ -60,7 +60,7 @@ def send_npy_to_server(url, api_key,file_path = "/home/sunyaqiang/work/QubitClie
 
     # dict_list, name_list = convert_spectrum_npy2npz(file_path)
     
-    client = QubitNNScopeClient(url=url,api_key="")
+    client = QubitNNScopeClient(url=url,api_key=api_key)
     
     # 1.使用从文件路径加载后的对象，格式为np.ndarray，多个组合成list
     import numpy as np
