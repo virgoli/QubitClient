@@ -46,17 +46,11 @@ def send_npz_to_server(url, api_key,dir_path = "data/33137"):
     
     #使用从文件路径加载后的对象，格式为np.ndarray，多个组合成list
     response = client.request(file_list=dict_list,task_type=NNTaskName.SPECTRUM2D,curve_type=CurveType.COSINE)
+    # 从文件路径直接加载
     # response = client.request(file_list=file_path_list,task_type=NNTaskName.SPECTRUM2D,curve_type=CurveType.COSINE)
     results = client.get_result(response=response)
     print(results)
     
-    # load data from path
-    # for index in range(len(file_path_list)):
-    #     # 使用文件路径，格式为str，形成list
-    #     response = client.request(file_list=[file_path_list[index]],task_type=TaskName.OPTPIPULSE)
-    #     results = client.get_result(response=response)
-    #     print(results)
-
 
 def main():
     from config import API_URL, API_KEY
