@@ -4,6 +4,7 @@ from .plyplotter import QuantumDataPlyPlotter
 from .spectrum2dplyplotter import Spectrum2DDataPlyPlotter
 from .s21vfluxplyplotter import S21VfluxDataPlyPlotter
 from .singleshotplyplotter import SingleShotDataPlyPlotter
+from .spectrum2dscopeplyplotter import Spectrum2DScopeDataPlyPlotter
 
 
 class QuantumPlotPlyManager:
@@ -18,6 +19,7 @@ class QuantumPlotPlyManager:
         self.plotters["spectrum2d"] = Spectrum2DDataPlyPlotter()
         self.plotters["s21vflux"] = S21VfluxDataPlyPlotter()
         self.plotters["singleshot"] = SingleShotDataPlyPlotter()
+        self.plotters["spectrum2dscope"] = Spectrum2DScopeDataPlyPlotter()
 
     def get_plotter(self, task_type: str) -> QuantumDataPlyPlotter:
 
