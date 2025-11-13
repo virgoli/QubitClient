@@ -1,6 +1,9 @@
 from typing import Dict, List
 from .pltplotter import QuantumDataPltPlotter
 from .spectrum2dpltplotter import Spectrum2DDataPltPlotter
+from .s21vfluxpltplotter import S21VfluxDataPltPlotter
+from .singleshotpltplotter import SingleShotDataPltPlotter
+from .spectrum2dscopepltplotter import Spectrum2DScopeDataPltPlotter
 
 class QuantumPlotPltManager:
     def __init__(self):
@@ -9,6 +12,9 @@ class QuantumPlotPltManager:
 
     def register_plotters(self):
         self.plotters["spectrum2d"] = Spectrum2DDataPltPlotter()
+        self.plotters["s21vflux"] = S21VfluxDataPltPlotter()
+        self.plotters["singleshot"] = SingleShotDataPltPlotter()
+        self.plotters["spectrum2dscope"] = Spectrum2DScopeDataPltPlotter()
 
     def get_plotter(self, task_type: str) -> QuantumDataPltPlotter:
         if task_type not in self.plotters:
@@ -19,10 +25,9 @@ class QuantumPlotPltManager:
         return list(self.plotters.keys())
 
     def plot_quantum_data(self, data_type: str, task_type: str, save_format: str = "png", save_name: str = "tmp0bf97fdf.py_1536", **kwargs):
-        save_name="result_"+save_name
         plotter = self.get_plotter(task_type)
         if data_type=='npy':
             fig = plotter.plot_result_npy(**kwargs)
         if data_type=='npz':
             fig = plotter.plot_result_npz(**kwargs)
-        plotter.save_plot(fig, save_name,save_format)
+        plotter.save_plot(fig, task_type,save_name,save_format)
