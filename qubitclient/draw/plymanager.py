@@ -2,6 +2,7 @@
 from typing import Dict, List
 from .plyplotter import QuantumDataPlyPlotter
 from .spectrum2dplyplotter import Spectrum2DDataPlyPlotter
+from .s21vfluxplyplotter import S21VfluxDataPlyPlotter
 
 
 class QuantumPlotPlyManager:
@@ -14,6 +15,7 @@ class QuantumPlotPlyManager:
     def register_plotters(self):
 
         self.plotters["spectrum2d"] = Spectrum2DDataPlyPlotter()
+        self.plotters["s21vflux"] = S21VfluxDataPlyPlotter()
 
     def get_plotter(self, task_type: str) -> QuantumDataPlyPlotter:
 
@@ -26,11 +28,10 @@ class QuantumPlotPlyManager:
         return list(self.plotters.keys())
 
     def plot_quantum_data(self, data_type: str, task_type: str,save_format: str = "html",save_name: str = "tmp0bf97fdf.py_1536",**kwargs):
-        save_name="result_"+save_name
         plotter = self.get_plotter(task_type)
         if data_type=='npy':
             fig = plotter.plot_result_npy(**kwargs)
         if data_type=='npz':
             fig = plotter.plot_result_npz(**kwargs)
 
-        plotter.save_plot(fig, save_name,save_format)
+        plotter.save_plot(fig,task_type, save_name,save_format)
