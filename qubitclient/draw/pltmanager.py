@@ -6,6 +6,12 @@ from .singleshotpltplotter import SingleShotDataPltPlotter
 from .spectrum2dscopepltplotter import Spectrum2DScopeDataPltPlotter
 from .s21peakpltplotter import S21PeakDataPltPlotter
 
+from .optpipulsepltplotter import OptPiPulseDataPltPlotter
+from .rabipltplotter import RabiDataPltPlotter
+from .t1fitpltplotter import T1FitDataPltPlotter
+from .t2fitpltplotter import T2FitDataPltPlotter
+from .rabicospltplotter import RabiCosDataPltPlotter
+
 class QuantumPlotPltManager:
     def __init__(self):
         self.plotters: Dict[str, QuantumDataPltPlotter] = {}
@@ -16,6 +22,11 @@ class QuantumPlotPltManager:
         self.plotters["s21vflux"] = S21VfluxDataPltPlotter()
         self.plotters["singleshot"] = SingleShotDataPltPlotter()
         self.plotters["spectrum2dscope"] = Spectrum2DScopeDataPltPlotter()
+        self.plotters["optpipulse"] = OptPiPulseDataPltPlotter()
+        self.plotters["rabicos"] = RabiCosDataPltPlotter()
+        self.plotters["t1fit"] = T1FitDataPltPlotter()
+        self.plotters["t2fit"] = T2FitDataPltPlotter()
+        self.plotters["rabi"] = RabiDataPltPlotter()
         self.plotters["s21peak"] = S21PeakDataPltPlotter()
 
     def get_plotter(self, task_type: str) -> QuantumDataPltPlotter:
