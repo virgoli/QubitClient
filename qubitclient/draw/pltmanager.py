@@ -5,6 +5,13 @@ from .s21vfluxpltplotter import S21VfluxDataPltPlotter
 from .singleshotpltplotter import SingleShotDataPltPlotter
 from .spectrum2dscopepltplotter import Spectrum2DScopeDataPltPlotter
 from .spectrumpltplotter import SpectrumDataPltPlotter
+from .s21peakpltplotter import S21PeakDataPltPlotter
+
+from .optpipulsepltplotter import OptPiPulseDataPltPlotter
+from .rabipltplotter import RabiDataPltPlotter
+from .t1fitpltplotter import T1FitDataPltPlotter
+from .t2fitpltplotter import T2FitDataPltPlotter
+from .rabicospltplotter import RabiCosDataPltPlotter
 
 class QuantumPlotPltManager:
     def __init__(self):
@@ -17,6 +24,12 @@ class QuantumPlotPltManager:
         self.plotters["singleshot"] = SingleShotDataPltPlotter()
         self.plotters["spectrum2dscope"] = Spectrum2DScopeDataPltPlotter()
         self.plotters["spectrum"] = SpectrumDataPltPlotter()
+        self.plotters["optpipulse"] = OptPiPulseDataPltPlotter()
+        self.plotters["rabicos"] = RabiCosDataPltPlotter()
+        self.plotters["t1fit"] = T1FitDataPltPlotter()
+        self.plotters["t2fit"] = T2FitDataPltPlotter()
+        self.plotters["rabi"] = RabiDataPltPlotter()
+        self.plotters["s21peak"] = S21PeakDataPltPlotter()
 
     def get_plotter(self, task_type: str) -> QuantumDataPltPlotter:
         if task_type not in self.plotters:
